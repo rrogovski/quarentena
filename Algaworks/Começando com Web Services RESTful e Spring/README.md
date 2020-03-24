@@ -368,3 +368,7 @@ HTTP/1.1 200 OK
 Acima temos a solicitação do recurso cliente pelo método `GET` e logo depois a resposta. Com dois links, deletar e notificar. E como que o cliente que consome essa API sabe que o deletar deve usar o método `DELETE` e o notíficar um outro tipo de método(`GET`,`POST`,`PUT`)? O significado desse relacionamento `rel="deletar"` ou `rel="notificar"` deve ser previamente combinado entre e o servidor e o cliente. Deve existir uma semântica, onde o cliente ao encontrar um relacionamento `rel="deletar"` deve se usar o método `DELETE`. De forma semelhante acontece no browser, pois ele sabe que ao encontar a tag `a` com o `href`, ele deve executar o método `GET` por convenção.
 
 [Veja também sobre HATEOAS](https://www.youtube.com/watch?v=M5NWpt5d59E)
+
+# Criação do Projeto
+
+Optei por usar o VS Code nesse projeto. Para criar um projeto Spring veja esse [vídeo](https://www.youtube.com/watch?v=dkmlOi_MNb4)
