@@ -276,6 +276,7 @@ Exemplo de uma API nível 0:
 
 ```
 POST /salvarCliente HTTP/1.1
+
 <cliente>
   <nome>João da Silva</nome>
   <nascimento>01/01/1970</nascimento>
@@ -296,6 +297,7 @@ Exemplo de uma API nível 1:
 
 ```
 POST /clientes HTTP/1.1
+
 <cliente>
   <nome>João da Silva</nome>
   <nascimento>01/01/1970</nascimento>
@@ -304,6 +306,65 @@ POST /clientes HTTP/1.1
 
 ## Nível 2: HTTP Verbs
 
-Depois de mapeados os recursos, agora podemos utilizar o protocolo HTTP de forma correta, consequentemente no levando para o nível 2.
+Depois de mapeados os recursos, agora podemos utilizar o protocolo HTTP de forma correta, consequentemente no levando para o nível 2, usando métodos e respostas.
+
+* Métodos(HTTP Verbs)
+  * GET
+  * POST
+  * PUT
+  * DELETE
+
+```
+POST /clientes HTTP/1.1
+
+<cliente>
+  <nome>João da Silva</nome>
+  <nascimento>01/01/1970</nascimento>
+</cliente>
+```
+
+Dessa forma, podemos fazer uso das repostas do HTTP, exemplo do retorno de uma possível resposta ao método POST executado acima.
+
+```
+HTTP/1.1 201 Created
+Location: /cliente/1
+```
+
+![level2](./img/level2.png "Nível 2")
 
 ## Nível 3: Hypermedia Controls
+
+O nível3, tem o que chamamos de motor de estado. A web como um todo é baseada em hypermedia. Se por exemplo acessarmos um conteúdo em index.html, além do conteúdo desse index.html, também será retornado links para outras páginas. Então a partir do index.html poderiamos ir para produtos.html, para clientes.html, contato.html ou carrinho.html. Então ao receber uma representação do index.html teremos links que nos levam para outros estados.
+
+![level3](./img/level3.png "Nível 3")
+
+Exemplo de um html:
+
+```
+<html>
+  <body>
+    <a href="produtos.html">Produtos</a>
+    <a href="clientes.html">Clientes</a>
+    <a href="contato.html">Contato</a>
+    <a href="carrinho.html">Carrihno</a>
+  </body>
+</html>
+```
+
+Exemplo de uma API nível 3:
+
+```
+GET /cliente/1 HTTP/1.1
+
+HTTP/1.1 200 OK
+
+<cliente>
+  <id>1</id>
+  <nome>João da Silva</nome>
+  <link rel="deletar" href="/cliente/1" />
+  <link rel="notificar" href="/cliente/1/notificar" />
+</cliente>
+```
+Acima temos a solicitação do recurso cliente pelo método `GET` e logo depois a resposta. Com dois links, deletar e notificar. E como que o cliente que consome essa API sabe que o deletar deve usar o método `DELETE` e o notíficar um outro tipo de método(`GET`,`POST`,`PUT`)? O significado desse relacionamento `rel="deletar"` ou `rel="notificar"` deve ser previamente combinado entre e o servidor e o cliente. Deve existir uma semântica, onde o cliente ao encontrar um relacionamento `rel="deletar"` deve se usar o método `DELETE`. De forma semelhante acontece no browser, pois ele sabe que ao encontar a tag `a` com o `href`, ele deve executar o método `GET` por convenção.
+
+[Veja também sobre HATEOAS](https://www.youtube.com/watch?v=M5NWpt5d59E)
