@@ -371,4 +371,12 @@ Acima temos a solicitação do recurso cliente pelo método `GET` e logo depois 
 
 # Criação do Projeto
 
-Optei por usar o VS Code nesse projeto. Para criar um projeto Spring veja esse [vídeo](https://www.youtube.com/watch?v=dkmlOi_MNb4)
+Optei por usar o VS Code nesse projeto. Para criar um projeto Spring veja esse [vídeo](https://www.youtube.com/watch?v=dkmlOi_MNb4).
+
+Documentações para auxiliar:
+
+[Lombok](https://github.com/rzwitserloot/lombok/wiki)
+
+[Spring JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference)
+
+[Hibernate JPA](https://docs.jboss.org/hibernate/jpa/2.1/api/overview-summary.html)
