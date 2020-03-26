@@ -2,23 +2,49 @@ package br.com.alura.forum.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@NoArgsConstructor
+@Table(name = "resposta")
 public class Resposta {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@Column(name = "id", updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Setter
+  @NotNull
+	@Column(name = "mensagem", nullable = false)
 	private String mensagem;
+
+	@Setter
+  @NotNull
+	@Column(name = "data_criacao", nullable = false)
+	private LocalDateTime dataCriacao = LocalDateTime.now();
+
+	@Setter
 	@ManyToOne
 	private Topico topico;
-	private LocalDateTime dataCriacao = LocalDateTime.now();
+
+	@Setter
 	@ManyToOne
 	private Usuario autor;
+
+	@Setter
 	private Boolean solucao = false;
 
 	@Override
@@ -45,53 +71,4 @@ public class Resposta {
 			return false;
 		return true;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
-	public Topico getTopico() {
-		return topico;
-	}
-
-	public void setTopico(Topico topico) {
-		this.topico = topico;
-	}
-
-	public LocalDateTime getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(LocalDateTime dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public Usuario getAutor() {
-		return autor;
-	}
-
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
-	}
-
-	public Boolean getSolucao() {
-		return solucao;
-	}
-
-	public void setSolucao(Boolean solucao) {
-		this.solucao = solucao;
-	}
-
 }

@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.forum.model.Topico;
+import lombok.Getter;
 
 /**
  * TopicoDto
  */
+@Getter
 public class TopicoDto {
 
     private Long id;
@@ -20,24 +22,8 @@ public class TopicoDto {
     public TopicoDto(Topico topico) {
         this.id = topico.getId();
         this.titulo = topico.getTitulo();
+        this.mensagem = topico.getMensagem();
         this.dataCriacao = topico.getDataCriacao();
-    }
-
-
-    public Long getId() {
-        return this.id;
-    }
-    
-    public String getTitulo() {
-        return this.titulo;
-    }
-
-    public String getMensagem() {
-        return this.mensagem;
-    }
-
-    public LocalDateTime getDataCriacao() {
-        return this.dataCriacao;
     }
 
     public static TopicoDto AsDto(Topico topico) {
