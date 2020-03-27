@@ -38,3 +38,10 @@ Que para receber dados enviados no corpo da requisição, a boa prática é cria
 * Que para montar uma resposta a ser devolvida ao cliente da API, devemos utilizar a classe ResponseEntity do Spring;
 * Que para testar requisições do tipo POST, precisamos utilizar alguma ferramenta de testes de API Rest;
 * Como utilizar o Postman para testar uma API Rest;
+
+### Aula 05 - Validação com Bean Validation
+
+* Para fazer validações das informações enviadas pelos clientes da API, podemos utilizar a especificação Bean Validation, com as anotações @NotNull, @NotEmpty, @Size, dentre outras;
+* Para o Spring disparar as validações do Bean Validation e devolver um erro 400, caso alguma informação enviada pelo cliente esteja inválida, devemos utilizar a anotação @Valid;
+* Para interceptar as exceptions que forem lançadas nos métodos das classes controller, devemos criar uma classe anotada com @RestControllerAdvice;
+* Para tratar os erros de validação do Bean Validation e personalizar o JSON, que será devolvido ao cliente da API, com as mensagens de erro, devemos criar um método na classe @RestControllerAdvice e anotá-lo com @ExceptionHandler e @ResponseStatus.
