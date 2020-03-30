@@ -380,3 +380,12 @@ Documentações para auxiliar:
 [Spring JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference)
 
 [Hibernate JPA](https://docs.jboss.org/hibernate/jpa/2.1/api/overview-summary.html)
+
+# Criando uma API RESTful
+
+## Considerações
+
+* Analogia: 
+  * Resources = Controllers
+  * Entities/Domain = Models
+  * Repositories = DAO

@@ -22,12 +22,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Table(name = "comentario")
-@SequenceGenerator(name = "comentario_seq", sequenceName = "comentario_seq", allocationSize = 1, initialValue = 1)
 public class Comentario {
 
   @Id
   @Column(name = "id", updatable = false)
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "comentario_seq")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Setter

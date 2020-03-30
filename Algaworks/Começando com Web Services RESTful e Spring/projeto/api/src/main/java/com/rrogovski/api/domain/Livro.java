@@ -26,12 +26,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Table(name = "livro")
-@SequenceGenerator(name = "livro_seq", sequenceName = "livro_seq", allocationSize = 1, initialValue = 1)
 public class Livro {
+
+  public Livro(String nome) {
+    this.nome = nome;
+  }
 
   @Id
   @Column(name = "id", updatable = false)
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "livro_seq")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   
   @Setter
@@ -41,23 +44,28 @@ public class Livro {
 
   @Setter
   @NotNull
+	@Column(name = "autor", nullable = false)
+  private String autor;
+
+  @Setter
+  @NotNull
 	@Column(name = "publicacao", nullable = false)
   private Date publicacao;
 
   @Setter
   @NotNull
-	@Column(name = "publicacao", nullable = false)
+	@Column(name = "editora", nullable = false)
   private String editora;
 
   @Setter
   @NotNull
-	@Column(name = "publicacao", nullable = false)
+	@Column(name = "resumo", nullable = false)
   private String resumo;
 
-  @Setter
-  @NotNull
-  @JoinColumn(name = "comentarios", nullable = false)
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro_id")
-  private List<Comentario> comentarios;
-  private String autor;
+  // @Setter
+  // @NotNull
+  // @JoinColumn(name = "comentarios", nullable = false)
+  // @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro_id")
+  // private List<Comentario> comentarios;
+  // private String autor;
 }
