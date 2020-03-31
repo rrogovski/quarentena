@@ -25,13 +25,13 @@ public class LivrosService {
   }
 
   public Livro buscar(Long id) {
-    Livro livro = livrosRepository.getOne(id);
+    Optional<Livro> livro = livrosRepository.findById(id);
 
-    if (livro == null) {
+    if (!livro.isPresent()) {
       throw new LivroNaoEncontratoException("Livro não encontrado!");
     }
 
-    return livro;
+    return livro.get();
   }
 
   public Livro salvar(Livro livro) {
