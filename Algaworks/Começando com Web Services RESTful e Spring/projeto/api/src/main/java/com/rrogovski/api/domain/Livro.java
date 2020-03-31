@@ -33,6 +33,7 @@ public class Livro {
   }
 
   @Id
+  @Setter
   @Column(name = "id", updatable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
