@@ -389,3 +389,4 @@ Documentações para auxiliar:
   * Resources = Controllers
   * Entities/Domain = Models
   * Repositories = DAO
+  * Services = Regras de Negócio
