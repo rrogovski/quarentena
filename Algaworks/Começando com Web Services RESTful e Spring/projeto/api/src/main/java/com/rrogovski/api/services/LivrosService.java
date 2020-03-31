@@ -1,6 +1,7 @@
 package com.rrogovski.api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.rrogovski.api.domain.Livro;
 import com.rrogovski.api.repository.LivrosRepository;
@@ -39,11 +40,12 @@ public class LivrosService {
   }
 
   public Livro deletar(Long id) {
-    Livro livro = livrosRepository.getOne(id);
-    try {
+    Optional<Livro> livro = livrosRepository.findById(id);
+
+    if (livro.isPresent()) {
       livrosRepository.deleteById(id);
-      return livro;
-    } catch (LivroNaoEncontratoException e) {
+      return livro.get();
+    } else {
       throw new LivroNaoEncontratoException("Livro não encontrado!");
     }
   }
