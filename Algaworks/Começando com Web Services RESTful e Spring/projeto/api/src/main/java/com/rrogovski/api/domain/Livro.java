@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -45,11 +47,6 @@ public class Livro {
 
   @Setter
   @NotNull
-	@Column(name = "autor", nullable = false)
-  private String autor;
-
-  @Setter
-  @NotNull
 	@Column(name = "publicacao", nullable = false)
   private Date publicacao;
 
@@ -62,6 +59,12 @@ public class Livro {
   @NotNull
 	@Column(name = "resumo", nullable = false)
   private String resumo;
+
+  @Setter
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "autor_id")
+  private Autor autor;
 
   @Setter
   @NotNull
