@@ -26,8 +26,8 @@ public class ResourceExceptionHandler {
   public ResponseEntity<DetalhesErro> handleLivroNaoEncontradoException (LivroNaoEncontratoException e, HttpServletRequest request) {
 
     String baseEnvLinkURL = null;
-   HttpServletRequest currentRequest = ((ServletRequestAttributes)RequestContextHolder.
-       currentRequestAttributes()).getRequest();
+    HttpServletRequest currentRequest = ((ServletRequestAttributes)RequestContextHolder.
+      currentRequestAttributes()).getRequest();
 
     baseEnvLinkURL = "http://" + currentRequest.getLocalName();
     

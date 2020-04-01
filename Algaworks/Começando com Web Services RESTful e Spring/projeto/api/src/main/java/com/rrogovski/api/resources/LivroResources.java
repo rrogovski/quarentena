@@ -3,6 +3,7 @@ package com.rrogovski.api.resources;
 import java.net.URI;
 import java.util.List;
 
+import com.rrogovski.api.domain.Comentario;
 import com.rrogovski.api.domain.Livro;
 import com.rrogovski.api.services.LivrosService;
 import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
@@ -10,6 +11,7 @@ import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,5 +59,13 @@ public class LivroResources {
 			return ResponseEntity.notFound().build();
 		}
 	}
-  
+	
+	@PostMapping("/{id}/comentarios")
+	public ResponseEntity<Void> adcionarComentario(@PathVariable("id") Long livroId, @RequestBody Comentario comentario) {
+		livrosService.salvarComentario(livroId, comentario);
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+
+		return ResponseEntity.created(uri).build();
+	}
 }

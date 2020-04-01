@@ -63,10 +63,9 @@ public class Livro {
 	@Column(name = "resumo", nullable = false)
   private String resumo;
 
-  // @Setter
-  // @NotNull
+  @Setter
+  @NotNull
   // @JoinColumn(name = "comentarios", nullable = false)
-  // @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro_id")
-  // private List<Comentario> comentarios;
-  // private String autor;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
+  private List<Comentario> comentarios;
 }

@@ -1,11 +1,13 @@
 package com.rrogovski.api.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.rrogovski.api.domain.Comentario;
 import com.rrogovski.api.domain.Livro;
+import com.rrogovski.api.repository.ComentariosRepository;
 import com.rrogovski.api.repository.LivrosRepository;
-import com.rrogovski.api.resources.LivroResources;
 import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class LivrosService {
 
   @Autowired
   private LivrosRepository livrosRepository;
+
+  @Autowired
+  private ComentariosRepository comentariosRepository;
 
   public List<Livro> listar() {
     return livrosRepository.findAll();
@@ -54,6 +59,15 @@ public class LivrosService {
     verificarExistencia(livro);
     livrosRepository.save(livro);
     return livro;
+  }
+
+  public Comentario salvarComentario(Long livroId, Comentario comentario) {
+    Livro livro = buscar(livroId);
+
+    comentario.setLivro(livro);
+    comentario.setData(new Date());
+
+    return comentariosRepository.save(comentario);
   }
 
   private void verificarExistencia(Livro livro) {
