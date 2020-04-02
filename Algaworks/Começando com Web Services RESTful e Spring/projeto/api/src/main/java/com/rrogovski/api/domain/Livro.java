@@ -67,7 +67,7 @@ public class Livro {
   private Autor autor;
 
   @Setter
-  @NotNull
+  // @NotNull
   // @JoinColumn(name = "comentarios", nullable = false)
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
   private List<Comentario> comentarios;
