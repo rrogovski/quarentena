@@ -5,6 +5,7 @@ import javax.xml.ws.http.HTTPBinding;
 
 import com.rrogovski.api.domain.DetalhesErro;
 import com.rrogovski.api.services.exceptions.AutorExistenteException;
+import com.rrogovski.api.services.exceptions.AutorNaoEncontradoException;
 import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
 
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,18 @@ public class ResourceExceptionHandler {
     DetalhesErro erro = new DetalhesErro();
     erro.setStatus(409l);
     erro.setTitulo("O autor já existe!");
+    erro.setMensagemDesenvolvedor(String.format("%s/409", baseURI()));
+    erro.setTimestamp(System.currentTimeMillis());
+
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+  }
+
+  @ExceptionHandler(AutorNaoEncontradoException.class)
+  public ResponseEntity<DetalhesErro> handleAutorNaoEncontradoException (AutorNaoEncontradoException e, HttpServletRequest request) {
+
+    DetalhesErro erro = new DetalhesErro();
+    erro.setStatus(409l);
+    erro.setTitulo("Autor não encontrado!");
     erro.setMensagemDesenvolvedor(String.format("%s/409", baseURI()));
     erro.setTimestamp(System.currentTimeMillis());
 
