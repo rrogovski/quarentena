@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.http.HTTPBinding;
 
 import com.rrogovski.api.domain.DetalhesErro;
+import com.rrogovski.api.services.exceptions.AutorExistenteException;
 import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
 
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,28 @@ public class ResourceExceptionHandler {
   @ExceptionHandler(LivroNaoEncontratoException.class)
   public ResponseEntity<DetalhesErro> handleLivroNaoEncontradoException (LivroNaoEncontratoException e, HttpServletRequest request) {
 
+    DetalhesErro erro = new DetalhesErro();
+    erro.setStatus(404l);
+    erro.setTitulo("Livro não encontrado!");
+    erro.setMensagemDesenvolvedor(String.format("%s/404", baseURI()));
+    erro.setTimestamp(System.currentTimeMillis());
+
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+  }
+
+  @ExceptionHandler(AutorExistenteException.class)
+  public ResponseEntity<DetalhesErro> handleAutorExistenteException (AutorExistenteException e, HttpServletRequest request) {
+
+    DetalhesErro erro = new DetalhesErro();
+    erro.setStatus(409l);
+    erro.setTitulo("O autor já existe!");
+    erro.setMensagemDesenvolvedor(String.format("%s/409", baseURI()));
+    erro.setTimestamp(System.currentTimeMillis());
+
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+  }
+
+  private String baseURI(){
     String baseEnvLinkURL = null;
     HttpServletRequest currentRequest = ((ServletRequestAttributes)RequestContextHolder.
       currentRequestAttributes()).getRequest();
@@ -32,19 +55,13 @@ public class ResourceExceptionHandler {
     baseEnvLinkURL = "http://" + currentRequest.getLocalName();
     
     if(currentRequest.getLocalPort() != 80) {
-        baseEnvLinkURL += ":" + currentRequest.getLocalPort();
+      baseEnvLinkURL += ":" + currentRequest.getLocalPort();
     }
     
     if(!StringUtils.isEmpty(currentRequest.getContextPath())) {
         baseEnvLinkURL += currentRequest.getContextPath();
     }
 
-    DetalhesErro erro = new DetalhesErro();
-    erro.setStatus(404l);
-    erro.setTitulo("Livro não encontrado!");
-    erro.setMensagemDesenvolvedor(String.format("%s/404", baseEnvLinkURL));
-    erro.setTimestamp(System.currentTimeMillis());
-
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    return baseEnvLinkURL;
   }
 }
