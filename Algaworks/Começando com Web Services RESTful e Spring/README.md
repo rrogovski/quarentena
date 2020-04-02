@@ -390,3 +390,11 @@ Documentações para auxiliar:
   * Entities/Domain = Models
   * Repositories = DAO
   * Services = Regras de Negócio
+
+## [Entendendo o Lazy e o Eager Load da JPA](https://blog.caelum.com.br/entendendo-o-lazy-e-o-eager-load-da-jpa/)
+
+Por padrão, quando o relacionamento está anotado com @OneToOne ou @ManyToOne ele é carregado de modo Eager ou seja, quando fizemos qualquer tipo de busca na entidade como por exemplo um find(Aluno.class, 1) ele será carregado junto com a entidade e nesse caso a JPA executará uma query só.
+
+Por padrão quando o relacionamento está anotado com @OneToMany ou @ManyToMany ele é carregado de modo Lazy ou seja, quando fizemos qualquer tipo de busca na entidade como por exemplo um find(Aluno.class, 1) ele não será carregado junto com a entidade, somente quando executarmos o comando getMatriculas() o relacionamento será carregado.
+
+Por o modo Lazy só carregar as informações quando executamos um getter fazer um aluno.getMatriculas().getCodigo() dentro de um for para pegar o código de todas as matriculas do aluno pode trazer problema de performance à aplicação, pois a JPA executará várias queries.

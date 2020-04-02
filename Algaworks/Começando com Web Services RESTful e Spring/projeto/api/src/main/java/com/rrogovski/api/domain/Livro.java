@@ -62,7 +62,7 @@ public class Livro {
 
   @Setter
   @NotNull
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
 	@JoinColumn(name = "autor_id")
   private Autor autor;
 
