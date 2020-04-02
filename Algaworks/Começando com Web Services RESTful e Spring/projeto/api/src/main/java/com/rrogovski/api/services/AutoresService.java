@@ -1,10 +1,12 @@
 package com.rrogovski.api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.rrogovski.api.domain.Autor;
 import com.rrogovski.api.repository.AutoresRepository;
 import com.rrogovski.api.services.exceptions.AutorExistenteException;
+import com.rrogovski.api.services.exceptions.AutorNaoEncontradoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,15 @@ public class AutoresService {
     }
 
     return autoresRepository.save(autor);
+  }
+
+  public Autor buscar(Long id) {
+    Optional<Autor> autor = autoresRepository.findById(id);
+
+    if(!autor.isPresent()) {
+      throw new AutorNaoEncontradoException("Autor não encontrado!");
+    }
+
+    return autor.get();
   }
 }
