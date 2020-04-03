@@ -3,6 +3,8 @@ package com.rrogovski.api.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.rrogovski.api.domain.Comentario;
 import com.rrogovski.api.domain.Livro;
 import com.rrogovski.api.services.LivrosService;
@@ -35,7 +37,7 @@ public class LivroResources {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Livro> salvar(@RequestBody Livro livro) {		
+	public ResponseEntity<Livro> salvar(@Valid @RequestBody Livro livro) {		
 		livro = livrosService.salvar(livro);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
@@ -62,7 +64,7 @@ public class LivroResources {
 	}
 	
 	@PostMapping("/{id}/comentarios")
-	public ResponseEntity<Void> adcionarComentario(@PathVariable("id") Long livroId, @RequestBody Comentario comentario) {
+	public ResponseEntity<Void> adcionarComentario(@Valid @PathVariable("id") Long livroId, @RequestBody Comentario comentario) {
 		livrosService.salvarComentario(livroId, comentario);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();

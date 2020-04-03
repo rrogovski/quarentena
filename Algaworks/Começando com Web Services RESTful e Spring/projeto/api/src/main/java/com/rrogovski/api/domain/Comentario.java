@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -46,6 +47,7 @@ public class Comentario {
   @NotEmpty(message = "Informação obrigatória")
   @Column(name = "texto", nullable = false)
   @Size(min = 10, max = 1000, message = "Quantidade de caracteres dever de 10 a 1000!")
+  @JsonProperty("comentario")
   private String texto;
   
   @Setter

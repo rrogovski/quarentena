@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.rrogovski.api.domain.Comentario;
 import com.rrogovski.api.domain.Livro;
+import com.rrogovski.api.repository.AutoresRepository;
 import com.rrogovski.api.repository.ComentariosRepository;
 import com.rrogovski.api.repository.LivrosRepository;
 import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
@@ -21,6 +22,9 @@ public class LivrosService {
 
   @Autowired
   private LivrosRepository livrosRepository;
+
+  @Autowired
+  private AutoresRepository autoresRepository;
 
   @Autowired
   private ComentariosRepository comentariosRepository;
@@ -41,6 +45,8 @@ public class LivrosService {
 
   public Livro salvar(Livro livro) {
     livro.setId(null);
+    livro.setAutor(autoresRepository.getOne(livro.getAutor().getId()));
+
     return livrosRepository.save(livro);
   }
 
