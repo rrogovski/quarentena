@@ -15,7 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -43,28 +45,33 @@ public class Livro {
   private Long id;
   
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  @NotEmpty(message = "Informação obrigatória")
 	@Column(name = "nome", nullable = false)
   private String nome;
 
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  // @NotEmpty(message = "Informação obrigatória")
   @Column(name = "publicacao", nullable = false)
   @JsonFormat(pattern = "dd/MM/yyyy")
   private Date publicacao;
 
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  @NotEmpty(message = "Informação obrigatória")
 	@Column(name = "editora", nullable = false)
   private String editora;
 
   @Setter
-  @NotNull
+  // @NotNull(message = "Informação obrigatória")
+  @NotEmpty(message = "Informação obrigatória")
+  @Size(min = 10, max = 1000, message = "Quantidade de caracteres dever de 10 a 1000!")
 	@Column(name = "resumo", nullable = false)
   private String resumo;
 
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
   @ManyToOne
 	@JoinColumn(name = "autor_id")
   private Autor autor;

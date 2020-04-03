@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import com.rrogovski.api.domain.Autor;
 import com.rrogovski.api.services.AutoresService;
 
@@ -33,7 +35,7 @@ public class AutoresResource {
   }
 
   @PostMapping
-  public ResponseEntity<Autor> salvar(@RequestBody Autor autor) {
+  public ResponseEntity<Autor> salvar(@Valid @RequestBody Autor autor) {
     autor = autoresService.salvar(autor);
 
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();

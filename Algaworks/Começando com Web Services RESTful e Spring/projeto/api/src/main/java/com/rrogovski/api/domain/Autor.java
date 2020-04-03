@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -35,18 +36,21 @@ public class Autor {
   private Long id;
 
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  @NotEmpty(message = "Informação obrigatória")
   @Column(name = "nome")
   private String nome;
 
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  // @NotEmpty(message = "Informação obrigatória")
   @Column(name = "nascimento")
   @JsonFormat(pattern = "dd/MM/yyyy")
   private Date nascimento;
 
   @Setter
-  @NotNull
+  // @NotNull(message = "Informação obrigatória")
+  // @NotEmpty(message = "Informação obrigatória")
   @Column(name = "nacionalidade")
   private String nacionalidade;
 

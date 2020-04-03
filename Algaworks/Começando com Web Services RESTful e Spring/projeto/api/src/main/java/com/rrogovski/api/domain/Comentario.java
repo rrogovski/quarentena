@@ -13,7 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,24 +42,29 @@ public class Comentario {
   private Long id;
 
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  @NotEmpty(message = "Informação obrigatória")
   @Column(name = "texto", nullable = false)
+  @Size(min = 10, max = 1000, message = "Quantidade de caracteres dever de 10 a 1000!")
   private String texto;
   
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  @NotEmpty(message = "Informação obrigatória")
   @Column(name = "usuario", nullable = false)
   private String usuario;
   
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  // @NotEmpty(message = "Informação obrigatória")
   @Column(name = "data", nullable = false)
   @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "GMT-4")
   // @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
   private Date data;
 
   @Setter
-  @NotNull
+  @NotNull(message = "Informação obrigatória")
+  // @NotEmpty(message = "Informação obrigatória")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "livro_id")
   @JsonIgnore
