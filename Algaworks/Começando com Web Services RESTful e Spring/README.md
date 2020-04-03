@@ -381,6 +381,14 @@ Documentações para auxiliar:
 
 [Hibernate JPA](https://docs.jboss.org/hibernate/jpa/2.1/api/overview-summary.html)
 
+[Guide to @JsonFormat in Jackson](https://www.baeldung.com/jackson-jsonformat)
+
+[Jackson Annotations](https://www.baeldung.com/jackson-advanced-annotations)
+
+[Java 8 LocalDate with Jackson Serialize and Deserialize Example](http://blog.chris-ritchie.com/2014/09/java-8-localdate-with-jackson-serialize.html)
+
+[Jackson custom date format](https://javadeveloperzone.com/spring/spring-jackson-custom-date-format/)
+
 # Criando uma API RESTful
 
 ## Considerações

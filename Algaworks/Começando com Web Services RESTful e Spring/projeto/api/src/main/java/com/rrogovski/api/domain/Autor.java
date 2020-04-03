@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class Autor {
   @Setter
   @NotNull
   @Column(name = "nascimento")
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date nascimento;
 
   @Setter

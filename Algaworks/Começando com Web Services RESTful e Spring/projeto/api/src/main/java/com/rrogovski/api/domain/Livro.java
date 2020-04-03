@@ -17,6 +17,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,7 +49,8 @@ public class Livro {
 
   @Setter
   @NotNull
-	@Column(name = "publicacao", nullable = false)
+  @Column(name = "publicacao", nullable = false)
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date publicacao;
 
   @Setter

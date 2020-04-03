@@ -8,6 +8,7 @@ import com.rrogovski.api.services.exceptions.AutorExistenteException;
 import com.rrogovski.api.services.exceptions.AutorNaoEncontradoException;
 import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -58,6 +59,18 @@ public class ResourceExceptionHandler {
     erro.setTimestamp(System.currentTimeMillis());
 
     return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+  }
+
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  public ResponseEntity<DetalhesErro> handleDataIntegrityViolationException (DataIntegrityViolationException e, HttpServletRequest request) {
+
+    DetalhesErro erro = new DetalhesErro();
+    erro.setStatus(400l);
+    erro.setTitulo("Requisição inválida!");
+    erro.setMensagemDesenvolvedor(String.format("%s/400", baseURI()));
+    erro.setTimestamp(System.currentTimeMillis());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
   }
 
   private String baseURI(){

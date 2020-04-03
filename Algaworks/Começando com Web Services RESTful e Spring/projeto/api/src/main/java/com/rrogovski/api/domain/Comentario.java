@@ -1,6 +1,7 @@
 package com.rrogovski.api.domain;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,6 +52,8 @@ public class Comentario {
   @Setter
   @NotNull
   @Column(name = "data", nullable = false)
+  @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "GMT-4")
+  // @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
   private Date data;
 
   @Setter
