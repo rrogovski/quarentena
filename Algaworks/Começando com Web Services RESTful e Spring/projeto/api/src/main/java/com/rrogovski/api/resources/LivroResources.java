@@ -2,6 +2,7 @@ package com.rrogovski.api.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
@@ -11,6 +12,8 @@ import com.rrogovski.api.services.LivrosService;
 import com.rrogovski.api.services.exceptions.LivroNaoEncontratoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +36,9 @@ public class LivroResources {
 
   @RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Livro>> listar() {
-		return ResponseEntity.ok(livrosService.listar());
+		CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);
+		// return ResponseEntity.ok(livrosService.listar());
+		return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(livrosService.listar());
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -46,7 +51,9 @@ public class LivroResources {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Livro> buscar(@PathVariable("id") Long id) {
-		return ResponseEntity.ok(livrosService.buscar(id));
+		CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);
+		// return ResponseEntity.ok(livrosService.buscar(id));
+		return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(livrosService.buscar(id));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
