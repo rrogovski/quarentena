@@ -30,7 +30,7 @@ public class AutoresResource {
   @Autowired
   private AutoresService autoresService;
 
-  @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE} )
+  @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
   public ResponseEntity<List<Autor>> listar() {
     return ResponseEntity.ok(autoresService.listar());
   }
